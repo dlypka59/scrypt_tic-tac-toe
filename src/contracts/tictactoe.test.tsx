@@ -1,6 +1,6 @@
-import { TicTacToe } from './tictactoe';
-import { bsv, PubKey, toHex, MethodCallOptions, TestWallet, findSig, DummyProvider } from 'scrypt-ts';
-import artifact from "../../artifacts/tictactoe.json";
+import { TicTacToe } from './ticTacToe';
+import { bsv, PubKey, toHex, MethodCallOptions, TestWallet, findSig, DummyProvider, SignatureResponse } from 'scrypt-ts';
+import artifact from "../../artifacts/ticTacToe.json";
 
 
 async function oneRound(records: bigint[]) {
@@ -35,7 +35,7 @@ async function oneRound(records: bigint[]) {
     const pubKey = currentInstance.isAliceTurn ? aliceKey.publicKey : bobKey.publicKey;
     const { tx, next } = await currentInstance.methods.move(
       records[i],
-      (sigResps) => findSig(sigResps, pubKey),
+      (sigResps: SignatureResponse[]) => findSig(sigResps, pubKey),
       {
         pubKeyOrAddrToSign: pubKey,
         changeAddress,

@@ -1,9 +1,21 @@
 import { useState } from "react";
 import Board from './Board';
-import { TicTacToe } from "./contracts/tictactoe";
+import { TicTacToe } from "./contracts/ticTacToe";
 import { GameData, SquareData } from "./types";
 import { Utils } from "./utils";
 import { bsv, SignatureResponse, findSig, MethodCallOptions } from 'scrypt-ts';
+
+// Reference:
+// https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
+
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return error.message
+  return String(error)
+}
+
+const reportError = ({message}: {message: string}) => {
+  // send the error to our logging service...
+}
 
 const calculateWinner = (squares: any) => {
   const lines = [
@@ -93,12 +105,12 @@ function Game(props: any) {
         square.tx = tx.id;
       }
   
-      console.log('move txid:', tx.id)
+      console.log('move txid:', tx.id);
   
       // update states
       if (nexts && nexts[0]) {
-        const instance = nexts[0].instance
-        props.setContract(instance)
+        const instance = nexts[0].instance;
+        props.setContract(instance);
       }
       const winner = calculateWinner(squares).winner;
       setGameData({
@@ -112,10 +124,13 @@ function Game(props: any) {
         currentStepNumber: history.length,
         start: true
       })
-      setLastTxId(tx.id)
+      setLastTxId(tx.id);
     } catch (error) {
-      console.error("error:", error);
-      alert("ERROR:" + error.message)
+      //console.error("error:", error);
+      //alert("ERROR:" + error.message);
+      // To correct handle the error in TypeScript, see:
+      // https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
+      reportError({message: getErrorMessage(error)});
     }
    
   }

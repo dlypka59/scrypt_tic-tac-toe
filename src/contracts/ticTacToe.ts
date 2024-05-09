@@ -69,7 +69,8 @@ export class TicTacToe extends SmartContract {
 
     @method()
     won(play: bigint): boolean {
-        let lines: FixedArray<FixedArray<bigint, 3>, 8> = [
+
+        /* let lines: FixedArray<FixedArray<bigint, 3>, 8> = [
             [0n, 1n, 2n],
             [3n, 4n, 5n],
             [6n, 7n, 8n],
@@ -78,15 +79,117 @@ export class TicTacToe extends SmartContract {
             [2n, 5n, 8n],
             [0n, 4n, 8n],
             [2n, 4n, 6n]
+        ]; */
+/*
+        let lines:string[ ][ ] = [ 
+            ["0", "1", "2"],
+            ["3", "4", "5"] //,
+            //[6, 7, 8],
+            //[0, 3, 6],
+            //[1, 4, 7],
+            //[2, 5, 8],
+            //[0, 4, 8],
+            //[2, 4, 6]
         ];
-
+*/
+/*
+        let lines: FixedArray<FixedArray<Array<number>, 3>, 8>  = [ 
+            [[0], [1], [2]],
+            [[3], [4], [5]] //,
+            //[6, 7, 8],
+            //[0, 3, 6],
+            //[1, 4, 7],
+            //[2, 5, 8],
+            //[0, 4, 8],
+            //[2, 4, 6]
+        ];       
+*/
+/*
+        let lines: FixedArray<FixedArray<bigint, 3>, 8> = [ 
+            [0n, 1n, 2n],
+            [3n, 4n, 5n],
+            [6n, 7n, 8n],
+            [0n, 3n, 6n],
+            [1n, 4n, 7n],
+            [2n, 5n, 8n],
+            [0n, 4n, 8n],
+            [2n, 4n, 6n]
+        ];      
+*/
         let anyLine = false;
 
         for (let i = 0; i < 8; i++) {
             let line = true;
-            for (let j = 0; j < 3; j++) {
-                line = line && this.board[Number(lines[i][j])] === play;
+            for (let j = 0; j < 3; j++) { 
+                //const strmyIndex0:string = (Number(lines[i][j])).toLocaleString();
+                //const myIndex:number = Number(parseInt(strmyIndex0.replace("n", "")));
+                //const myIndex:number = Number((lines[i][j]).valueOf().toString().replace("n", ""));
+                //const strmyIndex0:string = (lines[i][j]).valueOf().toString().replace("n", "");
+                //const myIndex:number = Number(parseInt(strmyIndex0));
+ /* 
+         0   [0n, 1n, 2n],
+         1   [3n, 4n, 5n],
+         2   [6n, 7n, 8n],
+         3   [0n, 3n, 6n],
+         4   [1n, 4n, 7n],
+         5   [2n, 5n, 8n],
+         6   [0n, 4n, 8n],
+         7   [2n, 4n, 6n]
+
+*/
+
+                if (0 == i && 0 == j) {line = line && this.board[0] === play;}
+                else
+                if (0 == i && 1 == j) {line = line && this.board[1] === play;}
+                else
+                if (3 == i && 0 == j) {line = line && this.board[6] === play;}
+                else
+                if (3 == i && 1 == j) {line = line && this.board[7] === play;}
+                else
+                if (3 == i && 2 == j) {line = line && this.board[8] === play;}
+                else
+                if (1 == i && 1 == j) {line = line && this.board[4] === play;}
+                else
+                if (1 == i && 2 == j) {line = line && this.board[5] === play;}
+                else
+                if (2 == i && 0 == j) {line = line && this.board[6] === play;}
+                else
+                if (2 == i && 1 == j) {line = line && this.board[7] === play;}
+                else
+                if (2 == i && 2 == j) {line = line && this.board[8] === play;}
+                else
+                if (3 == i && 0 == j) {line = line && this.board[0] === play;}
+                else
+                if (3 == i && 1 == j) {line = line && this.board[3] === play;}
+                else
+                if (3 == i && 2 == j) {line = line && this.board[6] === play;}
+                else
+                if (4 == i && 0 == j) {line = line && this.board[1] === play;}
+                else
+                if (4 == i && 1 == j) {line = line && this.board[4] === play;}
+                else
+                if (4 == i && 2 == j) {line = line && this.board[7] === play;}
+                else
+                if (5 == i && 0 == j) {line = line && this.board[2] === play;}
+                else
+                if (5 == i && 1 == j) {line = line && this.board[5] === play;}
+                else
+                if (5 == i && 2 == j) {line = line && this.board[8] === play;}                          
+                else
+                if (6 == i && 0 == j) {line = line && this.board[0] === play;}
+                else
+                if (6 == i && 1 == j) {line = line && this.board[4] === play;}
+                else
+                if (6 == i && 2 == j) {line = line && this.board[8] === play;}
+                else
+                if (7 == i && 0 == j) {line = line && this.board[2] === play;}
+                else
+                if (7 == i && 1 == j) {line = line && this.board[4] === play;}
+                else
+                if (7 == i && 2 == j) {line = line && this.board[6] === play;}                 
             }
+
+            console.log('Done the if()');
 
             anyLine = anyLine || line;
         }
